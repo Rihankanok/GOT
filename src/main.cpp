@@ -1,35 +1,28 @@
 #include <iostream>
-#include <vector>
-#include <string>
+#define NO_OF_CHARS 256
 
-using namespace std;
+bool verificare_sir(std::string sir)
+{
+    int litera[NO_OF_CHARS] = { 0 };
+    for (int i = 0; sir[i]; i++) 
+        litera[sir[i]]++;
 
-int main() {
-    string s;
-    cin >> s;
-
-    // Initialize a vector to count the occurrences of each character
-    vector<int> count(26, 0);
-
-    // Count the occurrences of each character in the string
-    for (char c : s) {
-        count[c - 'a']++;
+    int impar = 0;
+    for (int i = 0; i < NO_OF_CHARS; i++) {
+        if (litera[i] & 1)
+            impar++;
+        if (impar > 1)
+            return false;
     }
 
-    // Count the number of characters with odd number of occurrences
-    int odd_count = 0;
-    for (int c : count) {
-        if (c % 2 == 1) {
-            odd_count++;
-        }
-    }
+    return true;
+}
 
-    // Check if the string can be rearranged into a palindrome
-    if (odd_count <= 1) {
-        cout << "DA" << endl;
-    } else {
-        cout << "NU" << endl;
-    }
-
+int main()
+{
+  std::string sir;
+  std::cout <<"introduceti sirul de litere pentru a verifica daca e palindrom"<< std::endl;
+  std::getline(std::cin, sir);
+  verificare_sir(sir) ? std::cout << "Da\n" : std::cout << "Nu\n"; //"?:" referinta la operatorul de conditionare true sau false   
     return 0;
 }
